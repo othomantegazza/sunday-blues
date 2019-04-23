@@ -1,8 +1,8 @@
-baseURL = "/"
+baseURL = "https://example.com"
 languageCode = "en-us"
-title = "Sunday Blues"
-theme = "vanilla-bootstrap-hugo-theme-master"
-ignoreFiles = "content/post/_notes" 
+title = "Vanilla"
+theme = "vanilla-bootstrap-hugo-theme"
+googleAnalytics = "UA-123456789-1"
 
 # Uncomment below to enable syntax highlighting
 # pygmentsCodefences = true
@@ -52,4 +52,4 @@ ignoreFiles = "content/post/_notes"
   dateFormat = "Jan 2, 2006"
   homeText = "Welcome to the Vanilla theme demo. Have a look around. Maybe even eat some ice cream."
   footerText = "Made with [Hugo](https://gohugo.io/) & [Vanilla](https://github.com/zwbetz-gh/vanilla-bootstrap-hugo-theme)"
-hideFooter = false
+  hideFooter = false
