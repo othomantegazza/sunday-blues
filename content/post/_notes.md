@@ -1,0 +1,6 @@
+
+In Europe, this is governed by an interaction of multiple regulatory bodies at federal and state level, gathered around a key supervising and advisory Agency :the European Medicines Agency (EMA). This agency provides guidelines for drug research, drug evaluation and approval, and drug marketing. Many other entities are involved, including the European parliament, for legislation, innovationg and producing companies, and all correspective agencies and entities at the national level, which still have great freedom in the matter.
+
+The monetary costs of R&D for new drug are generally recovered by a patent, which at the European level can by granted by the European Patent Office (EPO) and by the Data Exclusivity Period, regulated by the EMA. The patent allows market exclusivity for 20 years since the patent application itself is filed (a patent application might have to be filed years before the new drug is cleared for marketing). The Data exclusivity period instead lasts for 8-10 years since the new drug is cleared for marketing. Which of the two expires last, determines the timespan that the innovating company has to gain back on R&D monetary costs, afterwards the market is open.
+
+The monetary costs are generally covered by a patent, and a right to commercialize the drug. In Europe these rights are awarded by the european patent office or by state offices.
