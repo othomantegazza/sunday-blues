@@ -105,26 +105,38 @@ to_comet <-
   n_holds %>% 
   filter(agrarea == "Total") %>%
   rename(ha = "ha_utilised_agricultural_area",
-         workers = "awu_total_labour_force_directly_employed_by_the_holding") %>% 
+         workers = "awu_total_labour_force_directly_employed_by_the_holding")
+
+
+to_comet_med <-
+  to_comet %>% 
+  filter(year(time) < 2013) %>% 
   group_by(geo) %>% 
-  mutate(med_ha = median(ha),
-         med_workers = median(workers)) 
+  summarise(med_ha = median(ha),
+            med_workers = median(workers)) 
+
+to_comet <- 
+  to_comet %>%
+  filter(year(time) == 2013) %>% 
+  full_join(to_comet_med)
 
 to_comet %>% 
-  filter(year(time) == 2013) %>% 
-  ggplot(aes(x = med_ha,
-             y = med_workers)) +
-  geom_link(aes(x = ha,
-                y = workers,
-                xend = med_ha,
+  ggplot(aes(x = ha,
+             y = workers)) +
+  geom_link(aes(xend = med_ha,
                 yend = med_workers,
                 alpha = ..index..,
                 size = ..index..)) +
-  geom_point(size = .5) +
-  geom_text(data = . %>% 
-              filter(workers > 400000),
-            aes(label = geo)) +
-  # scale_y_log10() +
-  # scale_x_log10() +
-  scale_size_continuous(range = c(.1, 1))
-  
+  geom_point(size = .3) +
+  # geom_text(data = . %>% 
+  #             filter(workers > 400000),
+  #           aes(label = geo)) +
+  scale_y_log10() +
+  scale_x_log10() +
+  scale_alpha_continuous(range = c(1, .1), guide = FALSE) +
+  scale_size_continuous(range = c(1, .1), guide = FALSE) +
+  theme_bw()
+
+n_holds %>% 
+  filter(geo == "Poland",
+         agrarea == "Total")
