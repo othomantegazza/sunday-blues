@@ -24,7 +24,19 @@ if(!file.exists(data_file)) {
           mutate_if(.predicate = is.factor, as.character)) %>% 
     map(~label_eurostat(., fix_duplicated = T))
   
-  save(dfs, file = data_file)
+  
+  dfs_countries <- 
+    tabs %>% 
+    map(~ get_eurostat(.) %>% 
+          mutate_if(.predicate = is.factor, as.character) %>% 
+          # keep only countries
+          filter(!str_detect(geo, pattern = "\\d")) %>% 
+          label_eurostat() %>% #pull(geo) %>% unique()
+          # Why are these still there?
+          filter(!geo %in% 	c("Nordrhein-Westfalen", "Rheinland-Pfalz",
+                              "Saarland", "Sachsen", "Sachsen-Anhalt",
+                              "Schleswig-Holstein", "Thüringen")))
+  save(dfs, dfs_countries, file = data_file)
 } else {
   load(data_file)
 }
@@ -140,3 +152,9 @@ to_comet %>%
 n_holds %>% 
   filter(geo == "Poland",
          agrarea == "Total")
+
+
+# country codess ----------------------------------------------------------
+
+dfs_countries %>% 
+  
