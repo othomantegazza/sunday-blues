@@ -70,7 +70,8 @@ dfs$ef_lflegaa$time %>% unique()
 
 # plot total number of holdings --------------------------------------------
 n_holds <- 
-  dfs$ef_kvaareg %>% 
+  # dfs$ef_kvaareg %>% 
+  dfs_countries$ef_kvaareg %>% 
   filter(indic_ef %in% c("hold: Total number of holdings",                      
                          "AWU: Total: Labour force directly employed by the holding"),
          legtype == "Total") %>% 
@@ -89,12 +90,15 @@ n_holds %>%
 
 # workforce vs agricultural hacres ------------------------------------------
 n_holds <- 
-  dfs$ef_kvaareg %>% 
+  # dfs$ef_kvaareg %>% 
+  dfs_countries$ef_kvaareg %>%
   filter(indic_ef %in% c("ha: Utilised agricultural area",                      
                          "AWU: Total: Labour force directly employed by the holding"),
          legtype == "Total") %>% 
   spread(key = "indic_ef", value = "values") %>% 
-  janitor::clean_names()
+  janitor::clean_names() %>% 
+  mutate(geo = geo %>% str_remove_all(" (until 1990 former territory of the FRG)")) 
+  
 
 n_holds %>% 
   filter(agrarea == "Total") %>% 
@@ -132,21 +136,29 @@ to_comet <-
   filter(year(time) == 2013) %>% 
   full_join(to_comet_med)
 
+point_col <- "#B63A82"
+
 to_comet %>% 
+  mutate(geo = geo %>% str_remove_all("\\(until 1990 former territory of the FRG\\)")) %>% 
   ggplot(aes(x = ha,
              y = workers)) +
   geom_link(aes(xend = med_ha,
                 yend = med_workers,
                 alpha = ..index..,
-                size = ..index..)) +
-  geom_point(size = .3) +
+                size = ..index..),
+            colour = point_col) +
+  geom_point(size = 1.7, colour = point_col) +
+  ggrepel::geom_text_repel(aes(label = geo),
+                           size = 3,
+                           colour = "grey20",
+                           nudge_y = -.03) +
   # geom_text(data = . %>% 
   #             filter(workers > 400000),
   #           aes(label = geo)) +
   scale_y_log10() +
   scale_x_log10() +
   scale_alpha_continuous(range = c(1, .1), guide = FALSE) +
-  scale_size_continuous(range = c(1, .1), guide = FALSE) +
+  scale_size_continuous(range = c(3, .1), guide = FALSE) +
   theme_bw()
 
 n_holds %>% 
@@ -156,5 +168,5 @@ n_holds %>%
 
 # country codess ----------------------------------------------------------
 
-dfs_countries %>% 
+# dfs_countries %>% 
   
