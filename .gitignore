@@ -6,3 +6,6 @@ public/*
 # data
 content/post/_data/*
 **.Rdata
+
+# plots
+static/_plots/*

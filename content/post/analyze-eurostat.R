@@ -43,6 +43,17 @@ if(!file.exists(data_file)) {
   load(data_file)
 }
 
+
+# ef_kvaareg levels -------------------------------------------------------
+
+dfs_countries$ef_kvaareg$indic_ef %>% unique()
+# [1] "ha: Utilised agricultural area"                           
+# [2] "LSU of the holdings with livestock"                       
+# [3] "hold: Total number of holdings"                           
+# [4] "AWU: Total: Labour force directly employed by the holding"
+# [5] "Euro: Standard output (SO)"                               
+# [6] "ha: Total area"
+
 # workforce vs agricultural hacres ------------------------------------------
 n_holds <- 
   # dfs$ef_kvaareg %>% 
@@ -117,7 +128,7 @@ n_holds %>%
 
 # Save plot ---------------------------------------------------------------
 
-svglite(file = "content/post/_plots/28-04-2019-workers-per-ha.svg")
+svglite(file = "static/_plots/28-04-2019-workers-per-ha.svg")
 p %>% print()
 dev.off()
 
@@ -187,7 +198,7 @@ p2 <-
                           width = 120) %>% 
          paste("~ Data from Eurostat", sep = "\n"))
 
-svglite(file = "content/post/_plots/28-04-2019-workers-per-holds.svg")
+svglite(file = "static/_plots/28-04-2019-workers-per-holds.svg")
 p2 %>% print()
 dev.off()
 
@@ -256,6 +267,6 @@ p3 <-
                           width = 120) %>% 
          paste("~ Data from Eurostat", sep = "\n"))
 
-svglite(file = "content/post/_plots/28-04-2019-output-vs-workers.svg")
+svglite(file = "static/_plots/28-04-2019-output-vs-workers.svg")
 p3 %>% print()
 dev.off()
