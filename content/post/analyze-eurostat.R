@@ -2,6 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(lubridate)
 library(ggforce)
+library(svglite)
 
 # get data ----------------------------------------------------------------
 
@@ -18,13 +19,14 @@ if(!file.exists(data_file)) {
             demo_r_d3area = "demo_r_d3area",
             ef_oluft = "ef_oluft")
   
+  # all administrative levels 
   dfs <- 
     tabs %>% 
     map(~ get_eurostat(.) %>% 
           mutate_if(.predicate = is.factor, as.character)) %>% 
     map(~label_eurostat(., fix_duplicated = T))
   
-  
+  # only countries
   dfs_countries <- 
     tabs %>% 
     map(~ get_eurostat(.) %>% 
@@ -41,53 +43,6 @@ if(!file.exists(data_file)) {
   load(data_file)
 }
 
-# kvaareg - agricultural area?
-dfs$demo_r_d3area %>% View() 
-
-
-# how are these datasetts composed ----------------------------------------
-
-# kvaareg - agricultural area? --------------------------------------------
-dfs$ef_kvaareg
-
-# type of holding?
-dfs$ef_kvaareg$legtype %>% unique()
-
-# measurement
-# stores total number of holdings
-dfs$ef_kvaareg$indic_ef %>% unique()
-
-
-# labour workforce --------------------------------------------------------
-dfs$ef_lflegaa
-
-# very detailed
-dfs$ef_lflegaa$indic_ef %>% unique()
-
-# it includes 2010, which is a full census
-dfs$ef_lflegaa$time %>% unique()
-
-
-# plot total number of holdings --------------------------------------------
-n_holds <- 
-  # dfs$ef_kvaareg %>% 
-  dfs_countries$ef_kvaareg %>% 
-  filter(indic_ef %in% c("hold: Total number of holdings",                      
-                         "AWU: Total: Labour force directly employed by the holding"),
-         legtype == "Total") %>% 
-  spread(key = "indic_ef", value = "values") %>% 
-  janitor::clean_names()
-
-
-# workforce vs number of holdings binned by hacres 
-n_holds %>% 
-  ggplot(aes(x = hold_total_number_of_holdings,
-             y = awu_total_labour_force_directly_employed_by_the_holding)) +
-  geom_point() +
-  facet_grid(time ~ agrarea) +
-  scale_y_log10() +
-  scale_x_log10()
-
 # workforce vs agricultural hacres ------------------------------------------
 n_holds <- 
   # dfs$ef_kvaareg %>% 
@@ -97,26 +52,12 @@ n_holds <-
          legtype == "Total") %>% 
   spread(key = "indic_ef", value = "values") %>% 
   janitor::clean_names() %>% 
-  mutate(geo = geo %>% str_remove_all(" (until 1990 former territory of the FRG)")) 
-  
-
-n_holds %>% 
-  filter(agrarea == "Total") %>% 
-  ggplot(aes(x = ha_utilised_agricultural_area,
-             y = awu_total_labour_force_directly_employed_by_the_holding)) +
-  geom_point() +
-  facet_grid(time ~ agrarea) +
-  scale_y_log10() +
-  scale_x_log10()
-
-# meh, no way to separate states?
-n_holds %>% 
-  filter(agrarea == "Total") %>% 
-  pull(geo) %>% unique()
-
+  mutate(geo = geo %>% str_remove_all("\\(until 1990 former territory of the FRG\\)")) 
 
 # comet plot of worker per ha ---------------------------------------------
 
+# draft the comet, you need median of previous year
+# or mean maybe better?
 to_comet <- 
   n_holds %>% 
   filter(agrarea == "Total") %>%
@@ -138,7 +79,8 @@ to_comet <-
 
 point_col <- "#B63A82"
 
-to_comet %>% 
+p <- 
+  to_comet %>% 
   mutate(geo = geo %>% str_remove_all("\\(until 1990 former territory of the FRG\\)")) %>% 
   ggplot(aes(x = ha,
              y = workers)) +
@@ -159,14 +101,161 @@ to_comet %>%
   scale_x_log10() +
   scale_alpha_continuous(range = c(1, .1), guide = FALSE) +
   scale_size_continuous(range = c(3, .1), guide = FALSE) +
-  theme_bw()
+  theme_bw() +
+  labs(x = "Cultivated Area",
+       y = "Number of Agricultural Workers",
+       caption = str_wrap("The points are 2013 measurements, the trails are 
+                          the median of 2005, 2007 and 2010 measurements.",
+                          width = 120) %>% 
+         paste("~ Data from Eurostat", sep = "\n"))
 
+# small checks
 n_holds %>% 
   filter(geo == "Poland",
          agrarea == "Total")
 
 
-# country codess ----------------------------------------------------------
+# Save plot ---------------------------------------------------------------
 
-# dfs_countries %>% 
-  
+svglite(file = "content/post/_plots/28-04-2019-workers-per-ha.svg")
+p %>% print()
+dev.off()
+
+
+# Workforce vs number of holds --------------------------------------------
+
+holds_ws <- 
+  # dfs$ef_kvaareg %>% 
+  dfs_countries$ef_kvaareg %>%
+  filter(indic_ef %in% c("hold: Total number of holdings",                      
+                         "AWU: Total: Labour force directly employed by the holding"),
+         legtype == "Total") %>% 
+  spread(key = "indic_ef", value = "values") %>% 
+  janitor::clean_names() %>% 
+  mutate(geo = geo %>% str_remove_all("\\(until 1990 former territory of the FRG\\)")) 
+
+# comet plot of worker per holding ---------------------------------------------
+
+# draft the comet, you need median of previous year
+# or mean maybe better?
+comet_holds_ws <- 
+  holds_ws %>% 
+  filter(agrarea == "Total") %>%
+  rename(n_holds = "hold_total_number_of_holdings",
+         workers = "awu_total_labour_force_directly_employed_by_the_holding")
+
+
+comet_holds_ws_med <-
+  comet_holds_ws %>% 
+  filter(year(time) < 2013) %>% 
+  group_by(geo) %>% 
+  summarise(med_holds = median(n_holds),
+            med_workers = median(workers)) 
+
+comet_holds_ws <- 
+  comet_holds_ws %>%
+  filter(year(time) == 2013) %>% 
+  full_join(comet_holds_ws_med)
+
+p2 <- 
+  comet_holds_ws %>% 
+  mutate(geo = geo %>% str_remove_all("\\(until 1990 former territory of the FRG\\)")) %>% 
+  ggplot(aes(x = n_holds,
+             y = workers)) +
+  geom_link(aes(xend = med_holds,
+                yend = med_workers,
+                alpha = ..index..,
+                size = ..index..),
+            colour = point_col) +
+  geom_point(size = 1.7, colour = point_col) +
+  ggrepel::geom_text_repel(aes(label = geo),
+                           size = 3,
+                           colour = "grey20",
+                           nudge_y = -.03) +
+  # geom_text(data = . %>% 
+  #             filter(workers > 400000),
+  #           aes(label = geo)) +
+  scale_y_log10() +
+  scale_x_log10() +
+  scale_alpha_continuous(range = c(1, .1), guide = FALSE) +
+  scale_size_continuous(range = c(3, .1), guide = FALSE) +
+  theme_bw() +
+  labs(x = "Number of Agricultural Holdings",
+       y = "Number of Agricultural Workers",
+       caption = str_wrap("The points are 2013 measurements, the trails are 
+                          the median of 2005, 2007 and 2010 measurements.",
+                          width = 120) %>% 
+         paste("~ Data from Eurostat", sep = "\n"))
+
+svglite(file = "content/post/_plots/28-04-2019-workers-per-holds.svg")
+p2 %>% print()
+dev.off()
+
+# Euro standard Output vs workers ---------------------------------
+
+ws_euros <- 
+  # dfs$ef_kvaareg %>% 
+  dfs_countries$ef_kvaareg %>%
+  filter(indic_ef %in% c("Euro: Standard output (SO)",                      
+                         "AWU: Total: Labour force directly employed by the holding"),
+         legtype == "Total") %>% 
+  spread(key = "indic_ef", value = "values") %>% 
+  janitor::clean_names() %>% 
+  mutate(geo = geo %>% str_remove_all("\\(until 1990 former territory of the FRG\\)")) 
+
+# comet plot of worker per holding ---------------------------------------------
+
+# draft the comet, you need median of previous year
+# or mean maybe better?
+comet_ws_euros <- 
+  ws_euros %>% 
+  filter(agrarea == "Total") %>%
+  rename(euro_soutput = "euro_standard_output_so",
+         workers = "awu_total_labour_force_directly_employed_by_the_holding")
+
+
+comet_ws_euros_med <-
+  comet_ws_euros %>% 
+  filter(year(time) < 2013) %>% 
+  group_by(geo) %>% 
+  summarise(med_euro_soutput = median(euro_soutput),
+            med_workers = median(workers)) 
+
+comet_ws_euros <- 
+  comet_ws_euros %>%
+  filter(year(time) == 2013) %>% 
+  full_join(comet_ws_euros_med)
+
+p3 <- 
+  comet_ws_euros %>% 
+  mutate(geo = geo %>% str_remove_all("\\(until 1990 former territory of the FRG\\)")) %>% 
+  ggplot(aes(x = workers,
+             y = euro_soutput)) +
+  geom_link(aes(xend = med_workers,
+                yend = med_euro_soutput,
+                alpha = ..index..,
+                size = ..index..),
+            colour = point_col) +
+  geom_point(size = 1.7, colour = point_col) +
+  ggrepel::geom_text_repel(aes(label = geo),
+                           size = 3,
+                           colour = "grey20",
+                           nudge_y = -.03) +
+  # geom_text(data = . %>% 
+  #             filter(workers > 400000),
+  #           aes(label = geo)) +
+  scale_y_log10() +
+  scale_x_log10() +
+  scale_alpha_continuous(range = c(1, .1), guide = FALSE) +
+  scale_size_continuous(range = c(3, .1), guide = FALSE) +
+  theme_bw() +
+  labs(x = "Number of Agricultural Workers",
+       y = "Standard Output [EUR]",
+       caption = str_wrap("The points are 2013 measurements, the trails are 
+                          the median of 2005, 2007 and 2010 measurements.",
+                          width = 120) %>% 
+         paste("~ Data from Eurostat", sep = "\n"))
+
+svglite(file = "content/post/_plots/28-04-2019-output-vs-workers.svg")
+p3 %>% print()
+dev.off()
