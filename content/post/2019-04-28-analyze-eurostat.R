@@ -114,7 +114,7 @@ p <-
   scale_size_continuous(range = c(3, .1), guide = FALSE) +
   theme_bw() +
   labs(x = "Cultivated Area",
-       y = "Number of Agricultural Workers Employed by the Holding",
+       y = "Number of Agricultural Workers Employed by the Holdings",
        caption = str_wrap("The points are 2013 measurements, the trails are 
                           the median of 2005, 2007 and 2010 measurements.",
                           width = 120) %>% 
@@ -192,11 +192,11 @@ p2 <-
   scale_size_continuous(range = c(3, .1), guide = FALSE) +
   theme_bw() +
   labs(x = "Number of Agricultural Holdings",
-       y = "Number of Agricultural Workers Employed by the Holding",
+       y = "Number of Agricultural Workers Employed by the Holdings",
        caption = str_wrap("The points are 2013 measurements, the trails are 
                           the median of 2005, 2007 and 2010 measurements.",
                           width = 120) %>% 
-         paste("~ Data from Eurostat", sep = "\n"))
+         paste("~ Data from Eurostat | Plot by @othomn", sep = "\n"))
 
 svglite(file = "static/_plots/28-04-2019-workers-per-holds.svg")
 p2 %>% print()
@@ -260,7 +260,7 @@ p3 <-
   scale_alpha_continuous(range = c(1, .1), guide = FALSE) +
   scale_size_continuous(range = c(3, .1), guide = FALSE) +
   theme_bw() +
-  labs(x = "Number of Agricultural Workers Employed by the Holding",
+  labs(x = "Number of Agricultural Workers Employed by the Holdings",
        y = "Standard Output [EUR]",
        caption = str_wrap("The points are 2013 measurements, the trails are 
                           the median of 2005, 2007 and 2010 measurements.",
