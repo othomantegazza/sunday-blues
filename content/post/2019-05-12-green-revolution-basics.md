@@ -1,8 +1,8 @@
 ---
-title: "A fixed point in time: The green revolution of agriculture"
+title: "The cultural heritage of the green revolution, we are still struggling to cope with"
 Author: "Otho Mantegazza. 1 of ?"
 draft: true
-summary: "During the green revolution the developed countries exported the model of intensive agriculture in the rest of the world. Some argue that many were fed and saved from starving. Others argue that this model caused vast environmental and societal damages. For sure, the green revolution was a point of breaking changes in agriculture and society. Some that we are still coping to deal with today." 
+summary: "During the green revolution the developed countries exported the model of intensive agriculture in the rest of the world. Some argue that many were fed and saved from starving. Others argue that this model caused vast environmental and societal damages. For sure, the green revolution was a point of breaking changes in agriculture and society. Some that changes, we are still struggling to deal with today." 
 ---
 
 In the 20th century, the developed countries defined the model of intensive agriculture. This model is based on maximizing immediate weight yield by applying mechanical, chemical and genetic technologies to the field. Intensive agriculture was then exported to the developing countries starting from the 1950. This technology transfer effort is known as the green revolution.
@@ -13,23 +13,27 @@ I'm not sure if we should consider as the paradigm shift point the moments in wh
 
 # Key technologies
 
-The green revoultion is a moment in which technologies are applied.
+Three branches of technologies were applied during the green revoultion: Mechanical, chemical and genetic technologies.
 
-These technologies are devided in three branches: Mechanical, chemical and genetic technologies.
+Mechanical technologies are applied in agriculture to plow the fields, irrigate, apply treatments to the plants, harvest, and process the harvested crops. Combine harvesters and tractors have helped massively increase the output of a field while drastically reducing workforce.
 
-Mechanical technologies are applied in agriculture to plow the fields, apply treatments to the plants, harvest, and process the harvested crops. Combine harvesters and tractors have helped massively increase the output of a field while drastically reducing workforce.
-
-Chemical technologies came a little bit latter, and are mostly applied in two branches: pesticides and fertilizers. While the immediate effect of this technologies is obvious, the long term results are still being debated today.
+Chemical technologies came a little bit later, and are mostly applied in two branches: pesticides and fertilizers. While the immediate effect of this technologies is obvious, the long term results are still being debated today.
 
 Genetic technologies have been the latest, and came with better understanding of the outcome of plant crossing, and expecially with the conceept of F1 hybrids.
 
-# Famines
+These are the three technologies that were exported massively during the green revolution.
 
-# Socio-economic landscape
+# Famines and the Socio-economic landscape
+
+
 
 # Cultural heritage and current issues
 
-Technological advances in mechanical technologies, chemistry and genetics . Until the 1950 intensive agriculture was defined in the developed countries, bringing technological advances into agriculture, after that, it was massively exported in the developing countries.
+The main critique is about the economic and the social container in which the green revolution was applied. 
+
+- Liberist imposition of technology: Cleaver
+- environmental effects of pesticides and fertilizers: Double standards - public eye.
+- Accessibility of hybrids. IFOAM
 
 
 # Resources:
@@ -39,6 +43,7 @@ Technological advances in mechanical technologies, chemistry and genetics . Unti
 - [The contradictions of the green revolution - PDF](https://la.utexas.edu/users/hcleaver/cleavercontradictions.pdf)
 - [The rise of Megafarm](https://www.theguardian.com/environment/2017/jul/18/rise-of-mega-farms-how-the-us-model-of-intensive-farming-is-invading-the-world)
 - [https://www.organicwithoutboundaries.bio/](https://www.organicwithoutboundaries.bio/)
+- [History of pesticies](https://alisonmcafeeblogs.wordpress.com/2017/05/24/a-short-history-of-pesticides-neonics-ddt-honey-bees/)
 
 ### From Wikipedia Intensive Farming
 
