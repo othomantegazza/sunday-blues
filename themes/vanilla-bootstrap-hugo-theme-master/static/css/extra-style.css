@@ -1,0 +1,36 @@
+body {
+    background: #1E2D6C;
+    color: #FFF;
+}
+
+div.container {
+    line-height: 170%;
+}
+
+a:not(.imagelink):not(.nav-link) {
+    color: inherit;
+    border-bottom:  0.2em solid #CD0A62;
+}
+  
+a:hover:not(.imagelink):not(.nav-link) {
+    color: #FFF;
+    background: #CD0A62;
+    text-decoration-line: none;
+}
+
+.nav {
+    margin-bottom: 10px;
+}
+
+/* from inline css at layouts/partial/style.html*/
+
+#nav a.nav-link-active {
+    background-color: #FFF;
+    color: #1E2D6C;
+}
+
+/*
+#nav-border {
+    border-bottom: 3px solid #FFF;
+}
+*/
