@@ -1,7 +1,8 @@
 /* Generic, Text */
 body {
     background: #1E2D6C;
-    color: #FFF;
+    /*color: #DBF0E8;*/
+    color: #FFF
 }
 
 div.container {
@@ -10,18 +11,29 @@ div.container {
 
 /* Post title */
 
-.b-post h1 {
+.b-post h1,
+.b-post h2,
+.b-post h3 {
     /*text-decoration: underline;*/
     /*padding: 4px;*/
     margin-top: 20px;
     margin-bottom: 20px;
+    color: #98F0D8;
+    border-bottom: 3px solid #CD0A62;
+    border-top: 3px solid #CD0A62;
 }
 
 .tt h1 {
+    color: #CD0A62;
     display: inline;
     background: #98F0D8;
-    color: #CD0A62;
+    border: none;
     /*color: #19265B;*/
+}
+
+.b-post div.p-info {
+    color: #CD0A62;
+    border-bottom: 2px solid #98F0D8;
 }
 
 /* Links */
@@ -31,16 +43,20 @@ a:not(.imagelink):not(.nav-link) {
 }
   
 a:hover:not(.imagelink):not(.nav-link) {
-    color: #FFF;
+    color: #DBF0E8;
     background: #CD0A62;
     text-decoration-line: none;
 }
 
 /* from inline css at layouts/partial/style.html*/
 
+#nav {
+    margin-bottom: 20px;
+}
+
 #nav a.nav-link-active {
-    background-color: #FFF;
-    color: #1E2D6C;
+    background-color: #98F0D8;
+    color: #CD0A62;
 }
 
 /*

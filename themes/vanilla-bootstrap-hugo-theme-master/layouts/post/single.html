@@ -2,13 +2,17 @@
 
 
 <div class="b-post">
-<div class="tt"><h1>{{ .Title }}</h1></div>
+    <div class="tt"><h1>{{ .Title }}</h1></div>
     <br>
     {{ .Summary }}
     <br><br>
+    <div class="p-info">
     {{ .Param "author" }}     |     
     {{ partial "date-and-tags.html" . }}
+    </div>
     <br><br>
+    {{ .TableOfContents }}
+    <br>
     {{ .Content }}
 </div>
 
