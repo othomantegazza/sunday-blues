@@ -1,3 +1,4 @@
+/* Generic, Text */
 body {
     background: #1E2D6C;
     color: #FFF;
@@ -7,6 +8,23 @@ div.container {
     line-height: 170%;
 }
 
+/* Post title */
+
+.b-post h1 {
+    /*text-decoration: underline;*/
+    /*padding: 4px;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.tt h1 {
+    display: inline;
+    background: #98F0D8;
+    color: #CD0A62;
+    /*color: #19265B;*/
+}
+
+/* Links */
 a:not(.imagelink):not(.nav-link) {
     color: inherit;
     border-bottom:  0.2em solid #CD0A62;
@@ -16,10 +34,6 @@ a:hover:not(.imagelink):not(.nav-link) {
     color: #FFF;
     background: #CD0A62;
     text-decoration-line: none;
-}
-
-.nav {
-    margin-bottom: 10px;
 }
 
 /* from inline css at layouts/partial/style.html*/

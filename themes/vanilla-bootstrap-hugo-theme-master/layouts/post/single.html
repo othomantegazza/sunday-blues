@@ -1,11 +1,15 @@
 {{ define "main" }}
 
-<h1>{{ .Title }}</h1>
-<br>
-{{ .Summary }}
-<br><br>
-{{ partial "date-and-tags.html" . }}
-<br><br>
-{{ .Content }}
+
+<div class="b-post">
+<div class="tt"><h1>{{ .Title }}</h1></div>
+    <br>
+    {{ .Summary }}
+    <br><br>
+    {{ .Param "author" }}     |     
+    {{ partial "date-and-tags.html" . }}
+    <br><br>
+    {{ .Content }}
+</div>
 
 {{ end }}
