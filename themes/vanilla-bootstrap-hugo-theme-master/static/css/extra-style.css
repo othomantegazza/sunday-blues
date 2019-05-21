@@ -11,29 +11,37 @@ div.container {
 
 /* Post title */
 
-.b-post h1,
-.b-post h2,
-.b-post h3 {
+.b-post h1 {
     /*text-decoration: underline;*/
     /*padding: 4px;*/
     margin-top: 20px;
     margin-bottom: 20px;
-    color: #98F0D8;
+    /*background: #FFF;
+    color: #CD0A62;
+    color: #444444;
+    border-top: 3px solid #CD0A62;*/
+    border-bottom: 5px solid #CD0A62;
+}
+
+.b-post h2,
+.b-post h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-bottom: 3px solid #CD0A62;
-    border-top: 3px solid #CD0A62;
 }
 
 .tt h1 {
     color: #CD0A62;
-    display: inline;
-    background: #98F0D8;
-    border: none;
+    /*display: inline;*/
+    background: #FFF;
+    /*background: #98F0D8;*/
+    border-bottom: 3px solid #98F0D8;
+    border-top: 3px solid #98F0D8;
     /*color: #19265B;*/
 }
 
 .b-post div.p-info {
-    color: #CD0A62;
-    border-bottom: 2px solid #98F0D8;
+    border-bottom: 3px solid #98F0D8;
 }
 
 /* Links */
@@ -55,8 +63,10 @@ a:hover:not(.imagelink):not(.nav-link) {
 }
 
 #nav a.nav-link-active {
-    background-color: #98F0D8;
+    background: #FFF;
+    /*background-color: #98F0D8;*/
     color: #CD0A62;
+    border-bottom:  0.2em solid #98F0D8;
 }
 
 /*
