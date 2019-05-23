@@ -1,7 +1,6 @@
 /* Generic, Text */
 body {
     background: #1E2D6C;
-    /*color: #DBF0E8;*/
     color: #FFF
 }
 
@@ -11,41 +10,39 @@ div.container {
     max-width: 1000px;
 }
 
-p, ul, ol, .summary {
-    max-width: 700px;
+.content p, ul, ol, .summary {
+    max-width: 650px;
     margin-left: 6%;
-    margin-right: 20%;
 }
 
-/* Post title */
+/* Post title stile */
 
 .b-post h1 {
-    /*text-decoration: underline;*/
-    /*padding: 4px;*/
     margin-top: 20px;
     margin-bottom: 20px;
-    /*background: #FFF;
-    color: #CD0A62;
-    color: #444444;
-    border-top: 3px solid #CD0A62;*/
     border-bottom: 5px solid #CD0A62;
 }
 
-.b-post h2,
-.b-post h3 {
+.b-post h2 {
     margin-top: 20px;
     margin-bottom: 20px;
     border-bottom: 3px solid #CD0A62;
 }
 
+
+.b-post h3 {
+    max-width: 700px;
+    margin-left: 4%;
+    margin-right: 20%;
+    font-size: 1.1rem !important; 
+    font-style: italic;
+}
+
 .tt h1 {
     color: #CD0A62;
-    /*display: inline;*/
     background: #FFF;
-    /*background: #98F0D8;*/
     border-bottom: 3px solid #98F0D8;
     border-top: 3px solid #98F0D8;
-    /*color: #19265B;*/
 }
 
 .b-post div.p-info {
@@ -72,7 +69,6 @@ a:hover:not(.imagelink):not(.nav-link) {
 
 #nav a.nav-link-active {
     background: #FFF;
-    /*background-color: #98F0D8;*/
     color: #CD0A62;
     border-bottom:  0.2em solid #98F0D8;
 }

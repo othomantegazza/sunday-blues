@@ -7,13 +7,14 @@
     <div class="summary">{{ .Summary }}</div>
     <br><br>
     <div class="p-info">
-    {{ .Param "author" }}     |     
-    {{ partial "date-and-tags.html" . }}
+        {{ .Param "author" }}     |     
+        {{ partial "date-and-tags.html" . }}
     </div>
-    <br><br>
-    {{ .TableOfContents }}
-    <br>
-    {{ .Content }}
+    <div class="content">
+        <br>
+        <br>
+        {{ .Content }}
+    </div>
 </div>
 
 {{ end }}

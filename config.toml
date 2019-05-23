@@ -39,11 +39,6 @@ ignoreFiles = ["content/post/_notes", "\\.Rproj$", "content/post/_data/*", "\\.R
     pre = "smile"
     url = "/about/"
     weight = 4
-  [[menu.nav]]
-    name = "RSS"
-    pre = "rss"
-    url = "/index.xml"
-    weight = 5
 
 [params]
   includeBootstrapJs = false

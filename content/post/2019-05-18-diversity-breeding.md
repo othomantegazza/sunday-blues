@@ -24,16 +24,18 @@ Breeding almost inevitably reduces biological diversity because it's a selective
 
 Selectivity, exclusivity and uniformity are the opposite of diversity, which often comes with complexity and unpredictability.
 
+## Policies and tecnology can cause diversity bottlenecks
+
 The conflicted relationship between diversity and breeding is discussed by Niels Louwaars in [this interesting article](https://link.springer.com/article/10.1007/s10681-018-2192-5). 
 According to Niels Louwaars the challenges that we face when we try to find a balance between breeding and biodiversity are technological but also regulatory or political. Each challenge might lead to a diversity bottleneck
 
-Some bottleneck that he describes are technological:
+Some bottleneck that he describes are **technological**:
 
 - Indeed the **domestication** process, the most ancient form of breeding, is a diversity bottleneck, since it selects few traits and reproduce them on a big scale. 
 - **Dispersal** is another, since domesticated varieties that have been moved around the world, often lose the chance to cross with wild counterparts,
 - On paper, **GMO and genome editing** could improve diversity, allowing to introduce new traits quickly into cultivated varieties. In practice, though, many question can be raised, such as, is the throughput of the genetic modification process high enough? And many more.
 
-Others bottlenecks at the policy level:
+Others bottlenecks at the **policy** level:
 
 - **Efficiency** in breeding causes great bottleneck, since efficiency is often achieved minimizing the number of breeders and breeding station.
 - Strict **rules for registering new varieties** can cause bottlenecks, since they might block diversity oriented breeding processes that do not achieve standards of uniformity.
@@ -51,9 +53,13 @@ One practical idea that was tested to introduce controlled pockets of biodiversi
 
 Multiline breeding was aimed at patching diversity's technological bottlenecks.
 
+### The risks of single line varieties
+
 The concept was developed first on oat and later [on wheat at CIMMYT](https://repository.cimmyt.org/bitstream/handle/10883/3889/22518.pdf?sequence=1&isAllowed=y), under the supervision of Norman Borlaug himself. Borlaug considered the *Father* of the green revolution, and is the person charged with exporting intensive agriculture from the US to South America, to India and to South East Asia, and thus also with spreading systematic single line breeding and the associated decrease in biodiversity. He was probably well aware that the benefits of a uniform and predictable single line varieties come with risks, for example risks of invasions of pests and disease.
 
 If a field is cultivated with plants that are genetically similar (or almost identical) to each other, those plants have the same properties of pest resistance and susceptibility, once a pest, a rust or a disease evolves a way to infect one plant, the whole field is vulnerable. Given time, the whole field could be invaded at epidemic levels. Multiline varieties introduce diversity in the field: different plants in the are susceptible to different pests, and resistant to other. This level of diversity might prevent the disease from spreading or at least slow it down. 
+
+### Difficult planning and implementation
 
 Though, the diversity introduced in a multiline variety is highly planned and highly controlled. Meaning that those multiline seed blends are difficult and expensive to plan, to prepare and to maintain. Especially because they are highly susceptible to genetic drift across generations, when farmers want to reuse their seeds.
 
@@ -63,16 +69,22 @@ Silly me, I didn't know that organic farming was not only about growing plants, 
 
 I'm not fond of some of the dogmas of organic agriculture, but when I read the position papers by [IFOAM](https://www.ifoam.bio/) on [plant breeding](https://www.ifoam.bio/sites/default/files/position_seeds.pdf) and on the [seed market](https://www.ifoam.bio/sites/default/files/position_paper_v01_web_0.pdf) I could not help but wonder that, at least on paper, they got the long term thinking and planning on breeding right.
 
+### Practical dogmas?
+
 Also, I could not help to wonder that maybe their dogmas have been practical choices. Organic agriculture bans categorically synthetic pesticides and fertilizers, and refuses to use GMOs.
 I personally think that strict and categorical rules make for bad rules. Yes, pesticides and fertilizers damage the environment, our health and they are not sustainable on the long term, but maybe a very informed and parsimonious use of pesticides and fertilizers, instead of a categorical ban, could be beneficial.
 
 The question on GMO is more complex: genetic modification and genome editing are powerful techniques and they could do great good or great damage. Like for all powerful techniques, a very cautious approach is completely justified. So, for both bans, I tend to disagree, but they could have been a practical decision if one judges that right now and in the current political landscape it is too hard and too unlikely to regulate synthetic pesticides, fertilizers and GMO reasonably.
+
+### Diversity through local initiatives and small systems
 
 Regarding diversity breeding, while organic breeding does not find big solutions on how to introduce diversity into breeding technology itself, it achieves diversity mainly by supporting local and small size breeding initiatives, which could carry benefits at many levels, and could break many policy and regulation bottlenecks.
 
 On the position paper on the [use of organic seeds and reproductive materials](https://www.ifoam.bio/sites/default/files/position_paper_v01_web_0.pdf) I found many points that make organic breeding is diversity oriented.
 
 First, an organic variety must be adapted to grow with little help. Thus organic breeders must avoid seed varieties that do well in average everywhere but could need massive amount of fertilizers and pesticides to thrive. They need to breed seed best adapted to the local condition, to the micro-climate and to the pest typical of one area, where the variety is planted. This encourages diversity in breeding by producing many varieties adapted to the local challenges.
+
+### Legal support and ban on patents
 
 Then, organic groups pledges to provide legal support for the **farm saved seeds**.
 In rural communities, seeds that have been used and domesticated there should have developed a great source of biological diversity and adaptation.
@@ -84,9 +96,13 @@ As a substitute they suggest to pay and share the burden for local testing and p
 
 Since breeding is often a very upstream process, I'm not sure that the costs of breeding could be shared by the market chain in a reasonable and effective way, without some form of patent. To avoid patenting of plant varieties, a good solution could be to support breeding with state funds. (Like it has been done widely in the past, and still now, to a lesser extent.)
 
+### For now, GMOs are not compatible
+
 The [position paper on organic breeding](https://www.ifoam.bio/sites/default/files/position_seeds.pdf) is mostly a crackdown on GMOs, on which I don't completely agree. Especially since it contains statements on alleged risk to health that GMOs should pose. To be clear: to assume that genetically modified plants pose, by themselves, any direct threat to human health, is against any kind of evidence and against any kind of reasonable doubt.
 
 Though, again, I think that a great caution on introducing Genetic Modification techniques into the seed market is totally justified, especially since GMO's alleged benefits to agriculture feel at best like an overstatement. Thus I totally agree on IFOAM's call for transparency in GMO documentation. And I also have to agree that GMO do not sound compatible with the decentralized breeding and propagation actions proposed and supported by IFOAM itself, at least at this moment.
+
+### A gentle approach
 
 Organic farming groups might have found a way to gently reconciliate agriculture and biological diversity. Their method doesn't come without doubts, for example: will organic breeding and farming it ever be applicable to overpopulated countries, maybe countries at risk of famine; but their manifesto contain great concepts, that we all can take inspiration from.
 
