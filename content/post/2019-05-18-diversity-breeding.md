@@ -2,7 +2,7 @@
 title: "Shaking the Habitual - Part 1: Diversity Aimed Plant Breeding"
 subtitle: "Concepts that can Change the Seed Market"
 summary: "A plant breed is easy to grow when it behaves in a uniform and expected way. But uniformity don't agree much with biodiversity, how can we balance the two?"
-author: "Otho Mantegazza"
+author: "[Otho Mantegazza](https://otho.netlify.com)"
 date: 2019-05-19
 ---
 
