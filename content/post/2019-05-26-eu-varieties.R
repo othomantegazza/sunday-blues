@@ -115,7 +115,10 @@ wheat2 <- read_csv2("content/post/_data/wheat-2.csv")
 wheat <- 
   bind_rows(wheat1, wheat2) %>% 
   distinct() %>% 
-  janitor::clean_names()
+  janitor::clean_names() %>% 
+  mutate(applicant = case_when(applicant %>% str_detect("KWS") ~ "KWS",
+                               applicant %>% str_detect("Limagrain") ~ "Limagrain",
+                               TRUE ~ applicant))
 
 wheat %>% 
   group_by(status) %>% 
@@ -357,3 +360,69 @@ barley_donut %>%
   coord_polar(theta = "y") +
   lims(x = c(-.4, 2)) +
   theme_void()
+
+
+# Function plot donut ----------------------------------------------------
+
+dat <- barley
+
+plot_donut <- function(dat) {
+  
+  # name of dataset as plot lable
+  plot_lab <- 
+    enexpr(dat) %>% deparse()
+  
+  # select applicant with 
+  top_applicant <- 
+    dat %>%
+    filter(status == "Granted") %>% 
+    group_by(applicant) %>% 
+    count() %>% 
+    ungroup() %>% 
+    top_n(n = 5, wt = n) %>% 
+    pull(applicant)
+  
+  print(top_applicant)
+  
+  dat_donut <- 
+    dat %>%
+    filter(status == "Granted") %>% 
+    group_by(applicant) %>% 
+    add_count() %>%
+    ungroup() %>% 
+    mutate(applicant = case_when(applicant %in% top_applicant ~ applicant,
+                                 TRUE ~ "Others")) %>% 
+    distinct(applicant, n) %>% 
+    group_by(applicant) %>% 
+    summarize(n = sum(n)) %>%
+    mutate(crop = 1,
+           applicant_short = str_split_fixed(string = applicant, pattern = " ", n = 2)[,1])
+  
+  
+  print(dat_donut)
+  
+  p <- 
+    dat_donut %>% 
+    ggplot(aes(x = crop,
+               fill = applicant,
+               y = n,
+               colour = applicant)) +
+    geom_bar(stat = "identity",
+             colour = "white") +
+    geom_text(aes(x = crop + 1,
+                  label = applicant_short),
+              position = position_stack(vjust = .5),
+              hjust = .5) +
+    annotate(geom = "text", label = plot_lab,
+             x = -.4, y = 0,
+             colour = "grey30") +
+    guides(colour = FALSE,
+           fill = FALSE) +
+    coord_polar(theta = "y") +
+    lims(x = c(-.4, 2)) +
+    theme_void()
+  
+  p
+}
+
+plot_donut(wheat)
