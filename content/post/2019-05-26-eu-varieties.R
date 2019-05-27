@@ -1,6 +1,7 @@
 library(tidyverse)
 library(eurostat)
 library(lubridate)
+library(grid)
 
 # weekdays in english
 Sys.setlocale("LC_TIME", "en_US.UTF8")
@@ -240,50 +241,6 @@ wheat %>%
   arrange(desc(n)) 
 
 
-
-# Donut plot --------------------------------------------------------------
-
-
-wheat_donut <- 
-  wheat %>% 
-  filter(status == "Granted") %>% 
-  mutate(applicant = case_when(applicant %>% str_detect("KWS") ~ "KWS",
-                               applicant %>% str_detect("Limagrain") ~ "Limagrain",
-                               TRUE ~ applicant)) %>% 
-  group_by(applicant) %>% 
-  add_count() %>%
-  ungroup() %>% 
-  mutate(applicant = case_when(n < 50 ~ "Other",
-                               TRUE ~ applicant)) %>% 
-  distinct(applicant, n) %>% 
-  group_by(applicant) %>% 
-  summarize(n = sum(n)) %>%
-  mutate(crop = 1,
-         applicant_short = str_split_fixed(string = applicant, pattern = " ", n = 2)[,1])
-
-
-
-wheat_donut %>% 
-  ggplot(aes(x = crop,
-             fill = applicant,
-             y = n,
-             colour = applicant)) +
-  geom_bar(stat = "identity",
-           colour = "white") +
-  geom_text(aes(x = crop + 1,
-                label = applicant_short),
-            position = position_stack(vjust = .5),
-            hjust = .5) +
-  annotate(geom = "text", label = "Wheat",
-           x = -.4, y = 0,
-           colour = "grey30") +
-  guides(colour = FALSE,
-         fill = FALSE) +
-  coord_polar(theta = "y") +
-  lims(x = c(-.4, 2)) +
-  theme_void()
-
-
 # Barley ------------------------------------------------------------------
 
 barley <- 
@@ -313,60 +270,80 @@ barley %>%
   ggplot(aes(x = n)) + 
   geom_histogram()
 
-top_barley <- 
-  barley %>%
+
+
+# rapeseed -------------------------------------------------------------------
+
+rapeseed <-  
+  read_csv2("content/post/_data/rapeseed.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(applicant = case_when(applicant %>% str_detect("KWS") ~ "KWS",
+                               applicant %>% str_detect("Limagrain") ~ "Limagrain",
+                               applicant %>% str_detect("Syngenta") ~ "Syngenta",
+                               applicant %>% str_detect("Monsanto") ~ "Monsanto",
+                               applicant %>% str_detect("Saatveredelung") ~ "DVS",
+                               applicant %>% str_detect("Norddeutsche Pflanzenzucht") ~ "NPZ",
+                               TRUE ~ applicant)) 
+
+rapeseed %>%
+  filter(status == "Active application") %>% 
+  group_by(applicant) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+rapeseed %>%
   filter(status == "Granted") %>% 
   group_by(applicant) %>% 
   count() %>% 
-  ungroup() %>% 
-  top_n(n = 5, wt = n) %>% 
-  pull(applicant)
-  
+  arrange(desc(n)) #%>% View()
 
-# Barley Donut ------------------------------------------------------------
-
-barley_donut <- 
-  barley %>% 
+rapeseed %>% 
   filter(status == "Granted") %>% 
   group_by(applicant) %>% 
-  add_count() %>%
-  ungroup() %>% 
-  mutate(applicant = case_when(applicant %in% top_barley ~ applicant,
-                               TRUE ~ "Others")) %>% 
-  distinct(applicant, n) %>% 
+  add_count() %>% 
+  ggplot(aes(x = n)) + 
+  geom_histogram()
+
+# durum wheat -----------------------------------------------------------------
+
+durum <-  
+  read_csv2("content/post/_data/durum.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(applicant = case_when(applicant %>% str_detect("KWS") ~ "KWS",
+                               applicant %>% str_detect("Limagrain") ~ "Limagrain",
+                               applicant %>% str_detect("Donau GmbH") ~ "Donau",
+                               applicant %>% str_detect("Pioneer") ~ "Pioneer",
+                               applicant %>% str_detect("Syngenta") ~ "Syngenta",
+                               applicant %>% str_detect("Monsanto") ~ "Monsanto",
+                               applicant %>% str_detect("Saatveredelung") ~ "DVS",
+                               applicant %>% str_detect("Norddeutsche Pflanzenzucht") ~ "NPZ",
+                               TRUE ~ applicant)) 
+
+
+durum %>%
+  filter(status == "Active application") %>% 
   group_by(applicant) %>% 
-  summarize(n = sum(n)) %>%
-  mutate(crop = 1,
-         applicant_short = str_split_fixed(string = applicant, pattern = " ", n = 2)[,1])
+  count() %>% 
+  arrange(desc(n))
 
+durum %>%
+  filter(status == "Granted") %>% 
+  group_by(applicant) %>% 
+  count() %>% 
+  arrange(desc(n)) # %>% View()
 
+durum %>% 
+  filter(status == "Granted") %>% 
+  group_by(applicant) %>% 
+  add_count() %>% 
+  ggplot(aes(x = n)) + 
+  geom_histogram()
 
-barley_donut %>% 
-  ggplot(aes(x = crop,
-             fill = applicant,
-             y = n,
-             colour = applicant)) +
-  geom_bar(stat = "identity",
-           colour = "white") +
-  geom_text(aes(x = crop + 1,
-                label = applicant_short),
-            position = position_stack(vjust = .5),
-            hjust = .5) +
-  annotate(geom = "text", label = "Barley",
-           x = -.4, y = 0,
-           colour = "grey30") +
-  guides(colour = FALSE,
-         fill = FALSE) +
-  coord_polar(theta = "y") +
-  lims(x = c(-.4, 2)) +
-  theme_void()
-
+  
 
 # Function plot donut ----------------------------------------------------
 
-dat <- barley
-
-plot_donut <- function(dat) {
+prepare_donut <- function(dat) {
   
   # name of dataset as plot lable
   plot_lab <- 
@@ -382,8 +359,7 @@ plot_donut <- function(dat) {
     top_n(n = 5, wt = n) %>% 
     pull(applicant)
   
-  print(top_applicant)
-  
+  # prepare for plot
   dat_donut <- 
     dat %>%
     filter(status == "Granted") %>% 
@@ -397,32 +373,81 @@ plot_donut <- function(dat) {
     summarize(n = sum(n)) %>%
     mutate(crop = 1,
            applicant_short = str_split_fixed(string = applicant, pattern = " ", n = 2)[,1])
-  
-  
-  print(dat_donut)
+}
+
+plot_donut <- function(dat,
+                       colors_in = color_plasma,
+                       fill_in = fill_plasma) {
+  plot_name <- dat$crop_name %>% unique()
   
   p <- 
-    dat_donut %>% 
+    dat %>% 
     ggplot(aes(x = crop,
-               fill = applicant,
+               fill = applicant_short,
                y = n,
-               colour = applicant)) +
+               colour = applicant_short)) +
     geom_bar(stat = "identity",
              colour = "white") +
     geom_text(aes(x = crop + 1,
                   label = applicant_short),
               position = position_stack(vjust = .5),
-              hjust = .5) +
-    annotate(geom = "text", label = plot_lab,
+              hjust = .5, 
+              size = 2.6) +
+    annotate(geom = "text", label = plot_name,
              x = -.4, y = 0,
-             colour = "grey30") +
+             colour = "grey30",
+             size = 2.6) +
+    colors_in +
+    fill_in +
     guides(colour = FALSE,
            fill = FALSE) +
     coord_polar(theta = "y") +
     lims(x = c(-.4, 2)) +
     theme_void()
-  
   p
 }
 
-plot_donut(wheat)
+d_in <- list(Wheat = wheat,
+     Barley = barley,
+     Rapeseed = rapeseed,
+     Durum = durum) %>% 
+  map_df(prepare_donut, .id = "crop_name") %>% 
+  mutate(applicant_short = applicant_short %>% as.factor())
+
+
+plasma_in <- viridis::plasma(13, end = .8)
+
+color_plasma <- scale_color_manual(values = set_names(x = plasma_in,
+                                                      nm = d_in$applicant_short %>%
+                                                        levels()))
+
+fill_plasma <- scale_fill_manual(values = set_names(x = plasma_in,
+                                                    nm = d_in$applicant_short %>%
+                                                      levels()))
+
+
+p_list <- 
+  d_in %>% 
+  split(.$crop_name) %>% 
+  map(plot_donut)
+
+
+
+# save donuts -------------------------------------------------------------
+
+grid_donut <- function(p, x, y) {
+  print(p,
+        vp = viewport(x = x,
+                      y = .5,
+                      width = .23))
+  return(NULL)
+}
+
+svglite::svglite("static/_plots/2019-05-26-registered-crops.svg",
+                 height = 2.7,
+                 width = 10)
+grid.newpage()
+tibble(p = p_list,
+       x = seq(.15, .85, length.out = 4)) %>% 
+  pmap(grid_donut)
+dev.off()
