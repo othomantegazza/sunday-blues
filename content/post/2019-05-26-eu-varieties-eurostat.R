@@ -12,10 +12,10 @@ violet <- "#70308F"
 # ggplot theme
 theme_set(theme_minimal() + 
             theme(axis.title = element_text(hjust = 1, size = 10,
-                                          colour = "grey10"),
-                plot.caption = element_text(colour = violet, 
-                                            # colour = "grey10",
-                                            size = 8))
+                                            colour = "grey10"),
+                  plot.caption = element_text(colour = violet, 
+                                              # colour = "grey10",
+                                              size = 8))
 )
 
 # get crop codes ----------------------------------------------------------
