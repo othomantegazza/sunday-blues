@@ -4,6 +4,7 @@ subtitle: "Concepts that can Change the Seed Market"
 summary: "A plant breed is easy to grow when it behaves in a uniform and expected way. But uniformity don't agree much with biodiversity, how can we balance the two?"
 author: "[Otho Mantegazza](https://otho.netlify.com)"
 date: 2019-05-19
+tags: ["Genetics", "Biodiversity", "Agriculture", "Plant Breeding", "Organic Agriculture", "IFOAM"]
 ---
 
 Lately, I've been studying how the European seed market works and how it is regulated. While searching for material on this topic, I found people and groups that are challenging this market with groundbreaking concepts and ideas, such as diversity breeding and open source seed licenses. 
