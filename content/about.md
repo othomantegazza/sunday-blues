@@ -2,18 +2,16 @@
 
 One post each Sunday.
 
-Sunday is one of the most contemplative and meditative days of the week.
-Sunday has a bluesy vibe, which mirrors best the feeling of this blog.
+Sunday is the most contemplative and meditative day of the week.
+It has a bluesy vibe, which mirrors best the feeling of this blog.
 
-This blog is about technologies of the life science and of genetics, and how those technologies influence our life and our society.
+This blog is about genetic technologies, and about how those technologies are regulated and how they impact our life and society, through medicine, industry and agriculture.
 
-I tend to read a lot, I tend to read a many posts and opinions that are excited and enthusiast about technological development, and many that oppose it.
+I tend to be excited about technology, or at least interested about it. I know that technological development can be a resource, but also a burden to society. A great technology can cause massive harm if introduced with superficial policies that opens it to exploitation.
 
-I tend to be excited about technologiy, or at least interested about it. But I know that technological development can be a resource, but also a burden to society. 
+And this is what I would like to explore in this blog I want to explore the impact of genetics technologies on society. When do they help and when do they harm, and how policies and regulation can change the balance between the two.
 
-So, I decided to try something different: in this blog I want to explore the impact of technological development - especially genetics and life science technologies - on society. When did development help societies to grow and prosper or when did it harm them, and who, within them, have been helped or harmed.
-
-Moreover, I'll try to explore current European - and possibly worldwide policies on technological development - write about them, and discuss them.
+I'll try to stick to this topic and discuss it in long argumantative articles.
 
 Stay tuned (^_~)
 
