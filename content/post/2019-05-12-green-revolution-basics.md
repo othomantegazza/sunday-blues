@@ -1,6 +1,6 @@
 ---
 title: "The cultural heritage of the green revolution, we are still struggling to cope with. (1 of ?)"
-Author: "Otho Mantegazza"
+Author: "[Otho Mantegazza](https://otho.netlify.com)"
 draft: true
 summary: "During the green revolution the developed countries exported the model of intensive agriculture in the rest of the world. Some argue that many were fed and saved from starving. Others argue that this model caused vast environmental and societal damages. For sure, the green revolution was a point of breaking changes in agriculture and society. Some that changes, we are still struggling to deal with today." 
 ---
