@@ -37,7 +37,7 @@ ignoreFiles = ["content/post/_notes", "\\.Rproj$", "content/post/_data/*", "\\.R
   [[menu.nav]]
     name = "About"
     pre = "smile"
-    url = "/about/"
+    url = "/about/about"
     weight = 4
 
 [params]
