@@ -78,3 +78,11 @@ a:hover:not(.imagelink):not(.nav-link) {
     border-bottom: 3px solid #FFF;
 }
 */
+
+
+/* post list */
+
+.post-list p, ul, ol, .summary {
+    max-width: 650px;
+    margin-left: 6%;
+}
