@@ -2,7 +2,7 @@ baseURL = "/"
 languageCode = "en-us"
 title = "Sunday Blues"
 theme = "vanilla-bootstrap-hugo-theme-master"
-ignoreFiles = ["content/post/_notes", "\\.Rproj$", "content/post/_data/*", "\\.R$"] 
+ignoreFiles = ["content/post/_notes", "\\.Rproj$", "content/post/_data/*", "\\.R$", "readme.md"] 
 
 # Uncomment below to enable syntax highlighting
 # pygmentsCodefences = true

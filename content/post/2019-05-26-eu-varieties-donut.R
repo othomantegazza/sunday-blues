@@ -6,6 +6,7 @@ library(forcats)
 
 # colours
 violet <- "#70308F"
+purple <- "#AA2255"
 
 # Wheat -------------------------------------------------------------------
 
@@ -96,8 +97,8 @@ p_wheat <-
   #                          size = 2) +
   scale_x_reverse(minor_breaks = function(x) {round(x[1]):round(x[2])}) +
   scale_y_date(date_labels = "%b %d") +
-  scale_colour_manual(values = c("#99999966", violet)) +
-  scale_size_continuous(guide = guide_legend(override.aes = list(colour = violet))) +
+  scale_colour_manual(values = c("#99999966", purple)) +
+  scale_size_continuous(guide = guide_legend(override.aes = list(colour = purple))) +
   coord_flip() +
   labs(x = "",
        y = "",
@@ -105,19 +106,21 @@ p_wheat <-
        caption = "Data from cpvo.europa.eu, on 25-05-2019") +
   # guides(colour = guide_legend(title.position = "top"),
   #        size = guide_legend(title.position = "top")) +
+  theme_minimal(base_family = "courier",
+                base_size = 15) +
   theme(legend.position = "top",
-        legend.text = element_text(size = 7,
-                                   colour = "grey20"),
-        legend.title = element_text(size = 9,
-                                    colour = "grey20"),
+        legend.text = element_text(colour = "grey20"),
+        legend.title = element_text(colour = "grey20"),
         legend.background = element_rect(size = 0,
-                                         fill = "grey96"))
+                                         fill = "grey96"),
+        plot.caption = element_text(size = 10, colour = purple))
 
 p_wheat
 
 svglite::svglite(file = "static/_plots/2019-05-26-wheat-lite.svg",
-                 height = 8,
-                 width = 6)
+                 height = 6,
+                 width = 10.42,
+                 pointsize = 1)
 p_wheat %>% print()
 dev.off()
 
@@ -288,21 +291,23 @@ plot_donut <- function(dat,
                y = n,
                colour = applicant_short)) +
     geom_bar(stat = "identity",
-             colour = "white") +
+             colour = "white",
+             size = 1.2) +
     geom_text(aes(x = crop + 1,
                   label = applicant_short),
               position = position_stack(vjust = .5),
               hjust = .5, 
-              size = 2.6) +
+              size = 2.4,
+              family = "courier") +
     annotate(geom = "text", label = plot_name,
              x = -.4, y = 0,
              colour = "grey30",
-             size = 2.6) +
+             size = 2.6, family = "courier") +
     colors_in +
     fill_in +
     guides(colour = FALSE,
            fill = FALSE) +
-    coord_polar(theta = "y") +
+    coord_polar(theta = "y", start = -(1/3)*pi) +
     lims(x = c(-.4, 2)) +
     theme_void()
   p
@@ -347,13 +352,14 @@ grid_donut <- function(p, x, y) {
   print(p,
         vp = viewport(x = x,
                       y = .5,
-                      width = .23))
+                      width = .245))
   return(NULL)
 }
 
-svglite::svglite("static/_plots/2019-05-26-registered-crops.svg",
+svglite::svglite("static/_plots/2019-05-26-registered-crops.svg", 
                  height = 2.2,
-                 width = 10)
+                 width = 10.42,
+                 pointsize = 1)
 grid.newpage()
 tibble(p = p_list,
        x = seq(.15, .85, length.out = 4)) %>% 
