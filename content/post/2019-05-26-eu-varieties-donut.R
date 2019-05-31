@@ -2,6 +2,10 @@ library(tidyverse)
 library(eurostat)
 library(lubridate)
 library(grid)
+library(forcats)
+
+# colours
+violet <- "#70308F"
 
 # Wheat -------------------------------------------------------------------
 
@@ -309,7 +313,14 @@ d_in <- list(Wheat = wheat,
              Rapeseed = rapeseed,
              Durum = durum) %>% 
   map_df(prepare_donut, .id = "crop_name") %>% 
-  mutate(applicant_short = applicant_short %>% as.factor())
+  mutate(applicant_short = applicant_short %>% as.factor(),
+         # "Other" as first level,
+         # To make the plot look nicer
+         applicant_short = applicant_short %>% 
+           {fct_shift(., n = which(levels(.) == "Others") - 1)})
+
+
+# standard palette --------------------------------------------------------
 
 
 plasma_in <- viridis::plasma(13, end = .8)

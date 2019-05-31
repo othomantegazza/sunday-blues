@@ -9,6 +9,13 @@ draft: true
 
 I'm really venturing in unfamiliar territories for me here, so I'll try to document my research process, to make it easier to follow and to find mistakes.
 
+{{< figure src="/_plots/2019-05-26-registered-crops.svg" >}}
+
+{{< figure src="/_plots/2019-05-26-wheat-lite.svg" >}}
+
+{{< figure src="/_plots/2019-05-26-main-crops.svg" >}}
+
+
 https://cpvoextranet.cpvo.europa.eu/mypvr/#!/en/publicsearch
 
 - What are the crops most used? Wheat? Rice?
