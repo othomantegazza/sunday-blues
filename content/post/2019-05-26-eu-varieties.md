@@ -1,19 +1,29 @@
 ---
-title: "Who submits plants to the register?"
+title: "Who Submits Plants to the European Register of Variety?"
 subtitle: "A sample of the european seed market"
-summary: "In the last ten years how many  sources of new plant varieties in Europe?"
+summary: "As a rule, if you want to market seeds or reproductive material of a plant variety, you have to register it. Each plant variety must be registered as distinct, uniform and stable and must have a potential value for coltvation. The registration process has been criticized for favouring big companies, accentrating the seed market in few hands. I explored the European Register of Varieties to check which plant seed is allowed in the market and which company holds the rights."
 author: "[Otho Mantegazza](https://otho.netlify.com)"
 date: 2019-05-26
 draft: true
 ---
 
-I'm really venturing in unfamiliar territories for me here, so I'll try to document my research process, to make it easier to follow and to find mistakes.
+I'm venturing in unfamiliar territories, so I'll try to document my research process, to make it easier to follow and to find the inevitable (and hopefully few) mistakes in my conclusions.
+
+To reach my conclusions I've downloaded data from Eurostat and the Community Plant Variety Office (CPVO) and analyzed them. The R script that I've used to analyze those data are available [here]() and [here]().
+
+# The regulatory backgrounnd
+
+# Main crops in Europe
+
+{{< figure src="/_plots/2019-05-26-main-crops.svg" >}}
+
+# Who registered most varieties
 
 {{< figure src="/_plots/2019-05-26-registered-crops.svg" >}}
 
-{{< figure src="/_plots/2019-05-26-wheat-lite.svg" >}}
+# Bonus, wheat varieties in the market right now
 
-{{< figure src="/_plots/2019-05-26-main-crops.svg" >}}
+{{< figure src="/_plots/2019-05-26-wheat-lite.svg" >}}
 
 
 https://cpvoextranet.cpvo.europa.eu/mypvr/#!/en/publicsearch
