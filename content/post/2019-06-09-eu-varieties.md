@@ -4,7 +4,6 @@ subtitle: "A sample of the European seed market"
 summary: "If you want to market a plant variety as seeds or reproductive material, you must register that plant variety to certify that it is distinct, uniform and stable and that it has a potential value for cultivation. The European plant variety registration process has been criticized for favoring big companies, and thus, accentrating the seed market in few hands. I explored the European Register of Varieties to check which plant seed is allowed in the market and which company holds the rights."
 author: "[Otho Mantegazza](https://otho.netlify.com)"
 date: 2019-06-09
-draft: true
 ---
 
 I'm venturing in unfamiliar territories, trying to explore the seed market in Europe (or more precisely, the market of Plant Reproductive and Propagation Material).
