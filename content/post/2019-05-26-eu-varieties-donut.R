@@ -294,15 +294,15 @@ plot_donut <- function(dat,
              colour = "white",
              size = 1.2) +
     geom_text(aes(x = crop + 1,
-                  label = applicant_short),
+                  label = paste(applicant_short, n, sep = "\n")),
               position = position_stack(vjust = .5),
               hjust = .5, 
               size = 2.4,
-              family = "courier") +
+              family = "sans") +
     annotate(geom = "text", label = plot_name,
              x = -.4, y = 0,
              colour = "grey30",
-             size = 2.6, family = "courier") +
+             size = 2.6, family = "sans") +
     colors_in +
     fill_in +
     guides(colour = FALSE,

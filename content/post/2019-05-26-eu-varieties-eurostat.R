@@ -48,8 +48,13 @@ eu_crops <-
   mutate_if(.predicate = is.factor, as.character) %>%
   filter(!str_detect(geo, pattern = "\\d")) %>% 
   # use descriptive labels
-  label_eurostat(fix_duplicated = T) %>%  #View()
-  # Small fix to countries
+  label_eurostat(fix_duplicated = T) # %>% View()
+
+save(eu_crops, file = "content/post/_data/ef_oluaareg2.Rdata")
+
+eu_crops <- 
+  eu_crops %>% 
+# Small fix to countries
   filter(!geo %in% 	c("Nordrhein-Westfalen", "Rheinland-Pfalz",
                       "Saarland", "Sachsen", "Sachsen-Anhalt",
                       "Schleswig-Holstein", "Thüringen")) %>% 
@@ -62,7 +67,7 @@ eu_crops <-
 eu_crops %>% 
   group_by(indic_ef) %>%
   summarise(prod = sum(values, na.rm = T)) %>% 
-  arrange(desc(prod)) %>% # View
+  arrange(desc(prod)) %>% View
   # ggplot(aes(x = reorder(indic_ef, prod),
   #            y = prod)) +
   # geom_boxplot() +
@@ -77,7 +82,11 @@ crops_in <- c("ha: Common wheat and spelt",
               "ha: Rape and turnip",
               # "ha: Green maize: Other green fodder: Fodder crops",
               "ha: Sunflower",
-              "ha: Olive plantations - total")
+              "ha: Olive plantations - total",
+              "ha: Oats",
+              "ha: Vineyards - total",
+              "ha: Rye",
+              "ha: Durum wheat")
 
 p_crops <- 
   eu_crops %>% 
@@ -104,5 +113,10 @@ p_crops
 
 ggsave(filename = "static/_plots/2019-05-26-main-crops.svg",
        width = 7.4,
-       height = 3.3)
-
+       height = 3.7)
+svglite::svglite("static/_plots/2019-05-26-main-crops.svg",
+                 width = 7.4,
+                 height = 3.7,
+                 pointsize = 1)
+p_crops %>% print()
+dev.off()
