@@ -364,4 +364,9 @@ grid.newpage()
 tibble(p = p_list,
        x = seq(.15, .85, length.out = 4)) %>% 
   pmap(grid_donut)
+grid.text(label = "Data from cpvo.europa.eu, on 25th May 2019",
+          x = 0.98, y = 0.02, 
+          hjust = 1, vjust = 0,
+          gp = gpar(fontsize = 8,
+                    col = violet))
 dev.off()
