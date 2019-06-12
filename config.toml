@@ -42,6 +42,7 @@ ignoreFiles = ["content/post/_notes", "\\.Rproj$", "content/post/_data/*", "\\.R
 
 [params]
   includeBootstrapJs = false
+  thumbnail = "/thumbnail/thumbnail.png"
   showActiveNav = true
   containerMaxWidth = "700px"
   dateFormat = "Jan 2, 2006"
