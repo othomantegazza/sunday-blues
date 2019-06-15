@@ -99,7 +99,7 @@ Eurostat
 
 # Further reads
 
-- The greens - [Concentration of market power in the EU seed market](https://www.greens-efa.eu/en/article/document/concentration-of-market-power-in-the-eu-seed-market/)
+- The Greens - [Concentration of market power in the EU seed market](https://www.greens-efa.eu/en/article/document/concentration-of-market-power-in-the-eu-seed-market/)
 - OECD - [Concentration in the seed market](https://www.oecd.org/publications/concentration-in-seed-markets-9789264308367-en.htm)
 - EU - [seeds on the market - PDF](https://www.europarl.europa.eu/RegData/bibliotheque/briefing/2013/130547/LDM_BRI(2013)130547_REV1_EN.pdf)
 - Public sector breeding in the era of privatization: [paper 1](https://www.researchgate.net/publication/23516896_Public_Sector_Plant_Breeding_In_A_Privatizing_World), [paper 2](https://www.researchgate.net/publication/42765146_Public_Plant_Breeding_in_an_Era_of_Privatisation)
