@@ -3,8 +3,7 @@ title: "Shaking the Habitual - (almost) part 2: Seed Markets and Open Source"
 subtitle: "A stepping stone toward a fair agriculture"
 summary: "Breeders rights, food justice, ecology and open source. A collection of topics to contextualize and discuss the Open Source Seed Licenses"
 author: "[Otho Mantegazza](https://otho.netlify.com)"
-date: 2019-06-13
-draft: true
+date: 2019-06-16
 ---
 
 I had to split my writing on Open Source Licenses for seeds in two posts. Mostly because it was becoming too long, also because this topic is very dear to me, so I wanted to give it a proper presentation. Sorry ;)
