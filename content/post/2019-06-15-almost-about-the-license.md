@@ -36,7 +36,7 @@ The public, as in every single member of our society has the [right to access sa
 
 This has often been termed **food security**. Which means, a condition in which everybody has access to necessary food, and in which food will not be used as a mean of political and social or economic pressure. [FAO](fao.org) is the main organism that monitors food security worldwide.
 
-A more comprehensive approach than food security, which caught my interest is **food justice**. If you are interest in the topic I would suggest to read about it, and I rate this concept higher than food security, since it investigates more deeply and more systematically the relationship between food and our society, how are they shaped by one another. And it is more rigorous in treating the history of our society and our food production systems including in it concepts like racism, trauma, land possession and labour arrangements. This concepts are discussed in [this brilliant paper]((https://journals.uair.arizona.edu/index.php/JPE/article/view/21077)) by Rachel Slocum.
+A more comprehensive approach than food security, which caught my interest is **food justice**. If you are interest in the topic I would suggest to read about it, and I rate this concept higher than food security, since it investigates more deeply and more systematically the relationship between food and our society, how are they shaped by one another. And it is more rigorous in treating the history of our society and our food production systems including in it concepts like racism, trauma, land possession and labour arrangements. This concepts are discussed in [this brilliant paper](https://journals.uair.arizona.edu/index.php/JPE/article/view/21077) by Rachel Slocum.
 
 (actually, the concept of food justice is so powerful that kind of kills down all the others. But for the sake of it ;) let go on with this blog post).
 
@@ -47,7 +47,7 @@ insect and animal life. Trust me on this, it's in our interest.
 
 When we introduce a tool so powerful, such as an **Open Source Seed license** into this system, what might be the impact on these four categories.
 
-# Issues with exclusivity rights on a plants
+# Issues with exclusivity rights on plants
 
 More in detail, an Open Source seed license is going to [interact with the exclusivisity rights on plant varieties](https://www.ip-watch.org/2017/04/28/new-open-source-licence-seeds/). How are these rights structured at this moment?
 
