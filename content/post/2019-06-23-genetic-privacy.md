@@ -3,8 +3,7 @@ title: "For Genetic Privacy"
 subtitle: ""
 summary: "Personal genetic information is getting easier to access and easier to decode; opening massive opportunities to cure and prevent diseases, but raising privacy concerns."
 author: "[Otho Mantegazza](https://otho.netlify.com)"
-date: 2019-06-17
-draft: true
+date: 2019-06-23
 ---
 
 On May 9th 2018, US Senator Marco Rubio and Chris Smith [wrote a letter](https://www.cecc.gov/media-center/press-releases/chairs-ask-commerce-secretary-ross-about-sale-of-surveillance-technology) to the US Commerce Secretary Wilbur Ross inquiring about sales of "technology for repression and control" by an US company to the Chinese government, which is under scrutiny for its action in the Xinjiang region.
@@ -118,7 +117,7 @@ We might not want that trained AI (which additionally, sometimes [could be biase
 
 Many people are already doing it. For example the EU has produced tight privacy laws and [bioethics](https://www.coe.int/en/web/bioethics) is a very active field of research and communication. Moreover, genotyping company such as 23andme have exemplary conducts when it comes to privacy. But, is everywhere around the world the same? Are we doing enough? I felt that these are important issues and trying to raise awareness about them might be worth it.
 
-We are taking giant steps with genetics and to make best use of it, we must first face and be prepared for its risks.
+We are taking giant steps with genetics and to make best use of it, we must first face concerns and be prepared for its risks.
 
 # Further Readings
 
