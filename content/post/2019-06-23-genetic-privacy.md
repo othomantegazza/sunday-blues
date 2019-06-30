@@ -115,7 +115,7 @@ But this case wasn't the first warning and many similar cases, maybe of smaller 
 Let's ask ourselves, if genetic data were not protected and access to them tightly regulated, what could go wrong?
 We might not want that trained AI (which additionally, sometimes [could be biased and poorly designed](https://www.fast.ai/2018/08/07/hbr-bias-algorithms/)) try to predict IQ and behavior of citizens, and we must avoid that people get discriminated at work or in healthcare systems or in education on the base of their heritage or genes, we might not want that authorities take into account genetics when dealing with citizens. But unfortunately these are issues that we might have to face, or at least be prepared about.
 
-Many people are already doing it. For example the EU has produced tight privacy laws and [bioethics](https://www.coe.int/en/web/bioethics) is a very active field of research and communication. Moreover, genotyping company such as 23andme have exemplary conducts when it comes to privacy. But, is everywhere around the world the same? Are we doing enough? I felt that these are important issues and trying to raise awareness about them might be worth it.
+Many people are already doing it. For example the EU has produced tight privacy laws and [bioethics](https://www.coe.int/en/web/bioethics) is a very active field of research and communication. Moreover, genotyping company such as 23andme had rigorously lawful conducts when it comes to privacy. But, is everywhere around the world the same? Are we doing enough? I felt that these are important issues and trying to raise awareness about them might be worth it.
 
 We are taking giant steps with genetics and to make best use of it, we must first face concerns and be prepared for its risks.
 
