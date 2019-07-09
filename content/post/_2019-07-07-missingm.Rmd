@@ -1,0 +1,357 @@
+---
+title: "Missing Migrant Dataset"
+author: "Otho Mantegazza"
+date: "`r Sys.Date()`"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(maptools)
+library(sf)
+library(leaflet)
+library(knitr)
+library(ggridges)
+library(lubridate)
+
+purple <- "#CD0A39"
+```
+
+```{r}
+Sys.setlocale("LC_TIME", "en_US.UTF8")
+
+# https://missingmigrants.iom.int/downloads on 28 July 2019
+mm <- read_csv("content/post/_data/MissingMigrants-Global-2019-06-26T00-37-45.csv",
+               col_types = cols(`Reported Date` = col_date(format = "%B %d, %Y")))
+
+# clean
+dat <- 
+  mm %>% 
+  janitor::clean_names() %>% 
+  separate(location_coordinates, into = c("lat", "long"), sep = ", ") %>% 
+  mutate_at(vars(lat, long), as.numeric)
+```
+
+# Quick exploration
+
+This dataset records:
+
+```{r}
+dat %>% pull(total_dead_and_missing) %>% sum(na.rm = T)
+```
+
+31160 migrants that died,
+
+```{r}
+dat %>% drop_na(total_dead_and_missing) %>%  nrow()
+```
+
+in 5512 events,
+
+```{r}
+dat %>% pull(reported_date) %>% range()
+```
+
+From 2014 to june 2019.
+
+Of this:
+
+```{r}
+dat %>% pull(number_of_females) %>% sum(na.rm = T)
+```
+
+1858 have been confirmed as women.
+
+```{r}
+dat %>% pull(number_of_males) %>% sum(na.rm = T)
+```
+
+5505 have been confirmed as men.
+
+
+```{r}
+dat %>% pull(number_of_children) %>% sum(na.rm = T)
+```
+
+1633 have been confirmed as children.
+
+## Cause of death, total dead and missing
+
+```{r}
+dat %>%
+  select(total_dead_and_missing, cause_of_death, location_description) %>% 
+  drop_na(total_dead_and_missing) %>% 
+  uncount(weights = total_dead_and_missing) %>%
+  count(cause_of_death) %>% 
+  arrange(desc(n)) %>% 
+  slice(1:15) %>% 
+  ggplot(aes(x = reorder(cause_of_death, n),
+             y = n)) +
+  geom_bar(stat = "identity", fill = purple) +
+  geom_text(aes(label = n,
+                y = n + 100),
+            hjust = 0,
+            colour = purple) +
+  coord_flip() +
+  theme_minimal() +
+  expand_limits(y = c(0, 18000)) +
+  labs(x = "")
+```
+
+## Area of Death, total dead and missing
+
+```{r}
+dat %>%
+  select(total_dead_and_missing, cause_of_death, region_of_incident) %>% 
+  drop_na(total_dead_and_missing, region_of_incident) %>% 
+  uncount(weights = total_dead_and_missing) %>%
+  count(region_of_incident) %>% 
+  arrange(desc(n)) %>% 
+  slice(1:15) %>% 
+  ggplot(aes(x = reorder(region_of_incident, n),
+             y = n)) +
+  geom_bar(stat = "identity", fill = purple) +
+  geom_text(aes(label = n,
+                y = n + 100),
+            hjust = 0,
+            colour = purple) +
+  coord_flip() +
+  theme_minimal() +
+  expand_limits(y = c(0, 18000)) +
+  labs(x = "")
+```
+
+## Area of death, region, reported date 
+
+```{r}
+dat %>% 
+  select(region_of_incident, reported_date, total_dead_and_missing) %>% 
+  drop_na() %>% 
+  uncount(weights = total_dead_and_missing) %>% 
+  ggplot(aes(x = region_of_incident,
+             y = reported_date)) +
+  ggbeeswarm::geom_quasirandom(size = .1, colour = purple, alpha = .2) +
+  coord_flip() +
+  theme_minimal()
+
+
+# bins as months
+n_bins <- 
+  dat %>%
+  transmute(my = paste(month(reported_date), year(reported_date))) %>% 
+  distinct() %>% nrow()
+
+# only top 6
+keep <- c("Mediterranean", "North Africa", 
+          "Southeast Asia", "US-Mexico Border",
+          "Sub-Saharan Africa", "Horn of Africa")
+
+dat %>% 
+  select(region_of_incident, reported_date, total_dead_and_missing) %>% 
+  filter(region_of_incident %in% keep) %>% 
+  drop_na() %>% 
+  uncount(weights = total_dead_and_missing) %>% 
+  ggplot(aes(x = reported_date)) +
+  geom_histogram(bins = n_bins, fill = purple, colour = "white") +
+  facet_grid(region_of_incident ~ .) +
+  theme_bw()
+```
+
+## Worst events
+
+```{r}
+dat %>% 
+  arrange(desc(total_dead_and_missing)) %>%
+  slice(1:15) %>% 
+  View()
+```
+
+## Mediterranean
+
+```{r}
+dat_med <- 
+  dat %>% 
+  filter(region_of_incident == "Mediterranean") 
+
+
+event_lab <-
+  paste0("<strong>", "Number of dead or missing: ",
+         dat_med$total_dead_and_missing,
+         "</strong>") %>% 
+  lapply(htmltools::HTML)
+
+
+dat_med %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(radius = ~log(total_dead_and_missing)*2,
+                   stroke = FALSE,
+                   color = purple,
+                   fillOpacity = .7, label = event_lab) 
+```
+
+
+```{r}
+# explore -----------------------------------------------------------------
+
+dat %>% 
+  ggplot(aes(x = long,
+             y = lat)) +
+  borders(fill = "#EAEA9F", colour = "white") +
+  geom_point(aes(alpha = total_dead_and_missing), colour = "#CD0A39")+
+  coord_map(projection = "mollweide" , orientation = c(90, 0, 0)) +
+  guides(size = FALSE) +
+  scale_alpha(range = c(.01, 1)) +
+  theme_void()
+
+# not sure of how to deal with n and h
+dat %>% 
+  select(lat, long, total_dead_and_missing) %>% 
+  drop_na() %>% 
+  uncount(weights = total_dead_and_missing) %>% 
+  ggplot(aes(x = long,
+             y = lat)) +
+  borders(fill = "#EAEA9F", colour = "white") +
+  stat_density_2d(aes(fill = stat(level)),
+                  geom = "polygon",
+                  n = 100,
+                  h = 30,
+                  alpha = .5) +
+  # stat_density2d(aes(fill = stat(level),
+  #                     geom = "polygon")) +
+  scale_fill_viridis_c() +
+  coord_map(projection = "mollweide" , orientation = c(90, 0, 0)) +
+  theme_void()
+
+dat %>% 
+  select(lat, long, total_dead_and_missing) %>% 
+  drop_na() %>% 
+  uncount(weights = total_dead_and_missing) %>% 
+  ggplot(aes(x = long,
+             y = lat)) +
+  borders(fill = "#EAEA9F", colour = "white") +
+  stat_bin2d(bins = c(600, 250), alpha = .7) +
+  # stat_density2d(aes(fill = stat(level),
+  #                     geom = "polygon")) +
+  scale_fill_viridis_c() +
+  coord_map(projection = "mollweide" , orientation = c(90, 0, 0)) +
+  theme_void()
+
+# tst <- dat %>% 
+#   select(lat, long, total_dead_and_missing) %>% 
+#   drop_na() %>% 
+#   uncount(weights = total_dead_and_missing)
+# 
+# purrr::map(tst, range)
+#   
+#   
+# 
+# ddd <- MASS::kde2d(x = tst$lat, y = tst$long)
+# 
+# tst %>% 
+#   mutate(z = ddd$z %>% as.numeric())
+
+
+
+# mediterranean -----------------------------------------------------------
+
+# nope
+dat %>% 
+  select(lat, long, total_dead_and_missing) %>% 
+  drop_na() %>% 
+  uncount(weights = total_dead_and_missing) %>% 
+  ggplot(aes(x = long,
+             y = lat)) +
+  borders(fill = "#EAEA9F", colour = "white",
+          xlim = c(-15, 40), ylim = c(25, 50)) +
+  lims(x = c(-15, 40),
+       y = c(25, 50))
+
+
+# with sf -----------------------------------------------------------------
+data("wrld_simpl")
+
+dat %>% 
+  select(lat, long, total_dead_and_missing) %>% 
+  drop_na() %>% 
+  uncount(weights = total_dead_and_missing) %>%
+  slice(1:1000) %>% 
+  st_as_sf(coords = c("long", "lat"),
+           crs = "+proj=longlat +datum=WGS84 +no_defs") %>% 
+  ggplot() +
+  geom_sf(data = wrld_simpl %>%
+            sf::st_as_sf(crs = "+proj=longlat +datum=WGS84 +no_defs")) +
+  geom_sf(colour = "red") +
+  theme_void() +
+  coord_sf()
+
+
+xlim <- c(-15, 40)
+ylim <- c(25, 50)
+
+# very  slow
+# dat %>% 
+#   select(lat, long, total_dead_and_missing) %>% 
+#   drop_na() %>% 
+#   uncount(weights = total_dead_and_missing) %>%
+#   filter(long > xlim[1], long < xlim[2],
+#          lat > ylim[1], lat < ylim[2]) %>% 
+#   st_as_sf(coords = c("long", "lat"),
+#            crs = "+proj=longlat +datum=WGS84 +no_defs") %>% 
+#   ggplot() +
+#   geom_sf(data = wrld_simpl %>% st_as_sf(),
+#           colour = "white",
+#           fill = "#EAEA9F") +
+#   geom_sf(colour = "#CD0A39",
+#           size = .5,
+#           alpha = .7) +
+#   coord_sf(crs = "+proj=longlat +datum=WGS84 +no_defs", 
+#            xlim = xlim,
+#            ylim = ylim) +
+#   theme_minimal()
+
+# leaflet
+
+latlongs <- 
+  dat %>% 
+  select(lat, long, total_dead_and_missing) %>% 
+  mutate(lon = long) %>% 
+  drop_na() %>% 
+  uncount(weights = total_dead_and_missing) %>%
+  # filter(long > xlim[1], long < xlim[2],
+  #        lat > ylim[1], lat < ylim[2]) %>% 
+  st_as_sf(coords = c("long", "lat"),
+           crs = "+proj=longlat +datum=WGS84 +no_defs") 
+
+leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(data = latlongs,
+             clusterOptions = markerClusterOptions())
+
+leaflet() %>% 
+  addTiles() %>% 
+  addCircles(data = latlongs)
+
+
+# explore -----------------------------------------------------------------
+
+dat %>%
+  select(total_dead_and_missing, cause_of_death, location_description) %>% 
+  drop_na(total_dead_and_missing) %>% 
+  uncount(weights = total_dead_and_missing) %>%
+  count(cause_of_death) %>% 
+  arrange(desc(n)) # %>% view()
+
+
+dat %>%
+  select(total_dead_and_missing, cause_of_death, location_description) %>% 
+  drop_na(total_dead_and_missing) %>% 
+  uncount(weights = total_dead_and_missing) %>%
+  count(cause_of_death) %>% 
+  arrange(desc(n)) # %>% view()
+
+dat %>% pull(reported_date) %>% range()
+```
+
