@@ -56,7 +56,7 @@ dat %>% pull(reported_date) %>% range()
 
 From 2014 to june 2019.
 
-Of this:
+Of them:
 
 ```{r}
 dat %>% pull(number_of_females) %>% sum(na.rm = T)
@@ -164,8 +164,7 @@ dat %>%
 ```{r}
 dat %>% 
   arrange(desc(total_dead_and_missing)) %>%
-  slice(1:15) %>% 
-  View()
+  slice(1:15)
 ```
 
 ## Mediterranean
