@@ -23,7 +23,7 @@ purple <- "#CD0A39"
 Sys.setlocale("LC_TIME", "en_US.UTF8")
 
 # https://missingmigrants.iom.int/downloads on 28 July 2019
-mm <- read_csv("content/post/_data/MissingMigrants-Global-2019-06-26T00-37-45.csv",
+mm <- read_csv("_data/MissingMigrants-Global-2019-06-26T00-37-45.csv",
                col_types = cols(`Reported Date` = col_date(format = "%B %d, %Y")))
 
 # clean
@@ -32,6 +32,10 @@ dat <-
   janitor::clean_names() %>% 
   separate(location_coordinates, into = c("lat", "long"), sep = ", ") %>% 
   mutate_at(vars(lat, long), as.numeric)
+
+# remove shortened url
+# dat$url[1:5] %>% str_split(pattern = ", ") %>% flatten_chr() %>% longurl::expand_urls()
+
 ```
 
 # Quick exploration
@@ -157,13 +161,12 @@ dat %>%
   slice(1:15)
 ```
 
-## Mediterranean
+# Mediterranean
 
 ```{r}
 dat_med <- 
   dat %>% 
-  filter(region_of_incident == "Mediterranean") 
-
+  filter(region_of_incident %in% c("Mediterranean", "Europe"))
 
 event_lab <-
   paste0("<strong>", "Number of dead or missing: ",
@@ -181,4 +184,50 @@ dat_med %>%
                    fillOpacity = .7, label = event_lab) 
 ```
 
+# Africa
+
+
+```{r}
+dat_africa <- 
+  dat %>% 
+  filter(region_of_incident %in% c("North Africa", "Sub-Saharan Africa",
+                                   "Horn of Africa")) 
+
+event_lab <-
+  paste0("<strong>", "Number of dead or missing: ",
+         dat_africa$total_dead_and_missing,
+         "</strong>") %>% 
+  lapply(htmltools::HTML)
+
+
+dat_africa %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(radius = ~log(total_dead_and_missing)*2,
+                   stroke = FALSE,
+                   color = purple,
+                   fillOpacity = .7, label = event_lab) 
+```
+
+# All 
+
+```{r}
+event_lab <-
+  paste0("Number of dead or missing: ",
+         dat$total_dead_and_missing, "<br>",
+         "reference article: ",
+         dat$url,
+         '<a href="https://www.r-project.org/">R Project</a>') %>% 
+  lapply(htmltools::HTML)
+
+
+dat %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(radius = ~log(total_dead_and_missing)*2,
+                   stroke = FALSE,
+                   color = purple,
+                   fillOpacity = .7, label = event_lab,
+                   popup='<a href="https://www.r-project.org/">R Project</a>') 
+```
 
